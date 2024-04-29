@@ -92,9 +92,11 @@
   };
 
   autoGroups = {
-    happy_checktime = {
-      clear = true;
-    };
+    happy_checktime = { clear = true; };
+    happy_highlight_yank = { clear = true; };
+    happy_auto_create_dir = { clear = true; };
+    happy_close_with_q = { clear = true; };
+    happy_resize_splits = { clear = true; };
   };
 
   autoCmd = [
@@ -112,7 +114,58 @@
     {
       event = [ "TextYankPost" ];
       group = "happy_highlight_yank";
-      callback = helpers.mkRaw '''';
+      callback = helpers.mkRaw /* lua */ ''
+        function() vim.highlight.on_yank() end
+      '';
+    }
+    {
+      event = [ "VimResized" ];
+      group = "happy_resize_splits";
+      callback = helpers.mkRaw /* lua */ ''
+        function()
+          local current_tab = vim.fn.tabpagenr()
+          vim.cmd("tabdo wincmd =")
+          vim.cmd("tabnext " .. current_tab)
+        end
+      '';
+    }
+    {
+      event = [ "FileType" ];
+      group = "happy_close_with_q";
+      pattern = helpers.toLuaObject [
+        "PlenaryTestPopup"
+        "help"
+        "lspinfo"
+        "notify"
+        "qf"
+        "query"
+        "spectre_panel"
+        "startuptime"
+        "tsplayground"
+        "neotest-output"
+        "checkhealth"
+        "neotest-summary"
+        "neotest-output-panel"
+      ];
+      callback = helpers.mkRaw /* lua */ ''
+        function(event)
+          vim.bo[event.buf].buflisted = false
+          vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+        end
+      '';
+    }
+    {
+      event = [ "BufWritePre" ];
+      group = "happy_auto_create_dir";
+      callback = helpers.mkRaw /* lua */ ''
+        function(event)
+          if event.match:match("^%w%w+:[\\/][\\/]") then
+            return
+          end
+          local file = vim.uv.fs_realpath(event.match) or event.match
+          vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+        end
+      '';
     }
   ];
 }
