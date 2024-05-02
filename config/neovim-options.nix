@@ -1,24 +1,6 @@
 { helpers, ... }:
 {
-  extraConfigLuaPre = /* lua */ ''
-    _G.HappyUtils = {}
-
-    function HappyUtils:is_linux()
-      return vim.fn.has("unix") == 1
-    end
-
-    function HappyUtils:is_apple()
-      return vim.fn.has("mac") == 1
-    end
-
-    function HappyUtils:is_win()
-      return vim.fn.has("windows") == 1
-    end
-
-    function HappyUtils:is_neovide()
-      return vim.g.neovide
-    end
-  '';
+  extraConfigLuaPre = builtins.readFile ../lua/happy_utils.lua;
 
   globals = {
     neovide_refresh_rate = 170;
@@ -39,6 +21,7 @@
     scrolloff = 8;
     foldlevel = 99;
     conceallevel = 2;
+    cursorline = true;
     autowrite = true;
     completeopt = "menu,menuone,noinsert";
     confirm = true;
@@ -56,7 +39,7 @@
     pumblend = 15;
     pumheight = 10;
     winblend = 30;
-    sessionoptions = [ "buffers" "curdir" "tabpages" "winsize" "help" "globals" "skiprtp" "folds" ];
+    sessionoptions = "buffers,curdir,tabpages,winsize,help,globals,skiprtp,folds";
     shiftround = true;
     shiftwidth = 2;
     shortmess = "TcWIlOCFot";

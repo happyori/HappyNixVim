@@ -8,8 +8,5 @@
   ];
 
   luaLoader.enable = true;
-  clipboard = {
-    register = "wl-copy";
-    providers.wl-copy.enable = true;
-  };
+  clipboard.providers.wl-copy.enable = true;
 }
