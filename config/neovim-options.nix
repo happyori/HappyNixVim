@@ -71,7 +71,6 @@
       eob = " ";
     };
     smoothscroll = true;
-    foldmethod = "indent";
   };
 
   autoGroups = {

@@ -6,6 +6,7 @@
     nixvim.url = "github:nix-community/nixvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nixd.url = "github:nix-community/nixd";
   };
 
   outputs =
