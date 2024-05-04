@@ -45,6 +45,14 @@ in
       options = { try_as_border = true; };
     };
   };
+  plugins.illuminate = {
+    enable = true;
+    delay = 200;
+    largeFileCutoff = 2000;
+    largeFileOverrides = {
+      providers = [ "lsp" ];
+    };
+  };
   colorschemes.rose-pine.settings.highlight_groups = {
     MiniIndentscopeSymbol = { fg = "pine"; };
   };
