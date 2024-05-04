@@ -10,6 +10,8 @@
     ./snippet-engine.nix
     ./indent.nix
     ./status-line.nix
+    ./oil.nix
+    ./pairs.nix
   ];
 
   plugins.nix.enable = true;
