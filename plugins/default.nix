@@ -7,6 +7,7 @@
     ./mini.nix
     ./which-key.nix
     ./telescope.nix
+    ./snippet-engine.nix
   ];
 
   plugins.nix.enable = true;

@@ -16,4 +16,6 @@
       };
     };
   };
+
+  plugins.transparent.enable = true;
 }

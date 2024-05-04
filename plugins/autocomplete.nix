@@ -17,6 +17,10 @@ in
         message = "CoQ and CMP are in conflict: CoQ -> ${boolAsString cfg.coq} | CMP -> ${boolAsString cfg.cmp}";
       }
     ];
+    custom.autocomplete = {
+      coq = false;
+      cmp = true;
+    };
   };
 
   imports = [

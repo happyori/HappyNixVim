@@ -10,7 +10,6 @@
       keymaps = {
         initSelection = "<C-space>";
         nodeIncremental = "<C-space>";
-        scopeIncremental = "";
         nodeDecremental = "<bs>";
       };
     };

@@ -8,6 +8,9 @@ in
     plugins.coq-nvim = {
       enable = true;
       installArtifacts = true;
+      settings = {
+        auto_start = true;
+      };
     };
     plugins.coq-thirdparty.enable = true;
   };
