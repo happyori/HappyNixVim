@@ -14,6 +14,16 @@
         transparency = true;
         bold = true;
       };
+      highlight_groups = {
+        RainbowDelimiterRed = { fg = "love"; };
+        RainbowDelimiterYellow = { fg = "gold"; };
+        RainbowDelimiterBlue = { fg = "pine"; };
+        RainbowDelimiterOrange = { fg = "rose"; };
+        RainbowDelimiterGreen = { fg = "foam"; };
+        RainbowDelimiterViolet = { fg = "iris"; };
+        RainbowDelimiterCyan = { fg = "pine"; };
+        CursorLine = { bold = true; bg = "overlay"; };
+      };
     };
   };
 

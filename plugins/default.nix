@@ -8,6 +8,8 @@
     ./which-key.nix
     ./telescope.nix
     ./snippet-engine.nix
+    ./indent.nix
+    ./status-line.nix
   ];
 
   plugins.nix.enable = true;
