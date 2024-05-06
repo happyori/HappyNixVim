@@ -6,4 +6,6 @@
       hipatterns = { };
     };
   };
+
+  extraConfigLua = builtins.readFile ../lua/mini-ai.lua;
 }
