@@ -7,14 +7,14 @@
         enable = true;
         package = inputs.nixd.packages.${system}.nixd;
       };
-      lua-ls = { };
-      dockerls = { };
-      jsonls = { };
-      nushell = { };
-      rust-analyzer = { };
-      tsserver = { };
-      yamlls = { };
-      gopls = { };
+      lua-ls = { enable = true; };
+      dockerls = { enable = true; };
+      jsonls = { enable = true; };
+      nushell = { enable = true; };
+      rust-analyzer = { enable = true; };
+      tsserver = { enable = true; };
+      yamlls = { enable = true; };
+      gopls = { enable = true; };
     };
   };
 
