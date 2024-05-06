@@ -11,7 +11,11 @@
       dockerls = { enable = true; };
       jsonls = { enable = true; };
       nushell = { enable = true; };
-      rust-analyzer = { enable = true; };
+      rust-analyzer = {
+        enable = true;
+        installCargo = true;
+        installRustc = true;
+      };
       tsserver = { enable = true; };
       yamlls = { enable = true; };
       gopls = { enable = true; };
