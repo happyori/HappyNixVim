@@ -1,6 +1,7 @@
 {
   plugins.luasnip.enable = true;
   plugins.cmp.settings.sources = [{ name = "luasnip"; }];
+  plugins.friendly-snippets.enable = true;
   keymaps = [
     {
       mode = "i";

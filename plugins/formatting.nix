@@ -27,7 +27,7 @@
     {
       mode = [ "n" "v" ];
       key = "<leader>cF";
-      action = "require('conform').format({ fromatters = { 'injected' }, timeout_ms = 3000 })";
+      action = "function() require('conform').format({ fromatters = { 'injected' }, timeout_ms = 3000 }) end";
       lua = true;
       options = { desc = "Format injected langs"; };
     }
