@@ -1,7 +1,7 @@
 {
   plugins.treesitter = {
     enable = true;
-    indent = true;
+    indent = false;
     folding = true;
     nixGrammars = true;
     nixvimInjections = true;
