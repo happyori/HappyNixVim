@@ -2,6 +2,7 @@
   imports = [
     ./autocomplete.nix
     ./lsp.nix
+    ./flash.nix
     ./formatting.nix
     ./nonels.nix
     ./treesitter.nix

@@ -1,4 +1,4 @@
-{ helpers, lib, ... }:
+{ lib, ... }:
 let
   betterUpDown = { key, dir ? key }:
     let
@@ -47,41 +47,48 @@ let
     map keymap' actions;
 in
 {
-  keymaps = lib.flatten [
-    (betterUpDown { key = "j"; })
-    (betterUpDown { key = "k"; })
-    (betterUpDown { key = "<Down>"; dir = "j"; })
-    (betterUpDown { key = "<Up>"; dir = "k"; })
+  options.happy.mkKeymap = lib.mkOption {
+    type = lib.types.anything;
+  };
 
-    windowMovement
-    windowResize
-    lineSwapping
+  config = {
+    happy.mkKeymap = keymap';
+    keymaps = lib.flatten [
+      (betterUpDown { key = "j"; })
+      (betterUpDown { key = "k"; })
+      (betterUpDown { key = "<Down>"; dir = "j"; })
+      (betterUpDown { key = "<Up>"; dir = "k"; })
 
-    (keymap' [ "n" "<S-h>" "<cmd>bprevious<cr>" { desc = "Move to previous buffer"; } ])
-    (keymap' [ "n" "<S-l>" "<cmd>bnext<cr>" { desc = "Move to next buffer"; } ])
-    (keymap' [ [ "n" "i" ] "<esc>" "<cmd>noh<cr><esc>" { desc = "Escape and clear hlsearch"; } ])
-    (keymap' [ [ "i" "n" "x" "s" ] "<C-s>" "<cmd>w<cr><esc>" { desc = "Save file and escape"; } ])
+      windowMovement
+      windowResize
+      lineSwapping
 
-    # Better indenting in visual
-    (keymap' [ "v" "<" "<gv" ])
-    (keymap' [ "v" ">" ">gv" ])
+      (keymap' [ "n" "<S-h>" "<cmd>bprevious<cr>" { desc = "Move to previous buffer"; } ])
+      (keymap' [ "n" "<S-l>" "<cmd>bnext<cr>" { desc = "Move to next buffer"; } ])
+      (keymap' [ [ "n" "i" ] "<esc>" "<cmd>noh<cr><esc>" { desc = "Escape and clear hlsearch"; } ])
+      (keymap' [ [ "i" "n" "x" "s" ] "<C-s>" "<cmd>w<cr><esc>" { desc = "Save file and escape"; } ])
 
-    (keymap' [ "n" "<leader>xl" "<cmd>lopen<cr>" { desc = "Location list"; } ])
-    (keymap' [ "n" "<leader>xq" "<cmd>copen<cr>" { desc = "Quickfix list"; } ])
-    (keymap' [ "n" "[q" "vim.cmd.cprev" { desc = "Previous Quickfix Entry"; } true ])
-    (keymap' [ "n" "]q" "vim.cmd.cnext" { desc = "Next Quickfix Entry"; } true ])
+      # Better indenting in visual
+      (keymap' [ "v" "<" "<gv" ])
+      (keymap' [ "v" ">" ">gv" ])
 
-    (keymap' [ "n" "<leader>qq" "<cmd>qa<cr>" { desc = "Quit it all"; } ])
-    (keymap' [ "n" "<leader>ui" "vim.show_pos" { desc = "Inspect position"; } true ])
+      (keymap' [ "n" "<leader>xl" "<cmd>lopen<cr>" { desc = "Location list"; } ])
+      (keymap' [ "n" "<leader>xq" "<cmd>copen<cr>" { desc = "Quickfix list"; } ])
+      (keymap' [ "n" "[q" "vim.cmd.cprev" { desc = "Previous Quickfix Entry"; } true ])
+      (keymap' [ "n" "]q" "vim.cmd.cnext" { desc = "Next Quickfix Entry"; } true ])
 
-    (keymap' [ "n" "<leader>|" "<C-W>v" { desc = "Split window right"; remap = true; } ])
-    (keymap' [ "n" "<leader>-" "<C-W>s" { desc = "Split window below"; remap = true; } ])
-    (keymap' [ [ "n" "i" "x" ] "<C-q>" "<cmd>q!<cr>" { desc = "Force quit window"; } ])
-    (keymap' [ "n" "<leader>W" "HappyUtils.close_buffer" { desc = "Close the active buffer"; } true ])
+      (keymap' [ "n" "<leader>qq" "<cmd>qa<cr>" { desc = "Quit it all"; } ])
+      (keymap' [ "n" "<leader>ui" "vim.show_pos" { desc = "Inspect position"; } true ])
 
-    (keymap' [ "n" "<home>" "HappyUtils.move_to_start" { desc = "Improved home"; } true ])
-    (keymap' [ "n" "<end>" "HappyUtils.move_to_end" { desc = "Improved end"; } true ])
-    (keymap' [ [ "n" "i" ] "<C-,>" "HappyUtils.move_to_start" { desc = "Improved home"; } true ])
-    (keymap' [ [ "n" "i" ] "<C-.>" "HappyUtils.move_to_end" { desc = "Improved end"; } true ])
-  ];
+      (keymap' [ "n" "<leader>|" "<C-W>v" { desc = "Split window right"; remap = true; } ])
+      (keymap' [ "n" "<leader>-" "<C-W>s" { desc = "Split window below"; remap = true; } ])
+      (keymap' [ [ "n" "i" "x" ] "<C-q>" "<cmd>q!<cr>" { desc = "Force quit window"; } ])
+      (keymap' [ "n" "<leader>W" "HappyUtils.close_buffer" { desc = "Close the active buffer"; } true ])
+
+      (keymap' [ "n" "<home>" "HappyUtils.move_to_start" { desc = "Improved home"; } true ])
+      (keymap' [ "n" "<end>" "HappyUtils.move_to_end" { desc = "Improved end"; } true ])
+      (keymap' [ [ "n" "i" ] "<C-,>" "HappyUtils.move_to_start" { desc = "Improved home"; } true ])
+      (keymap' [ [ "n" "i" ] "<C-.>" "HappyUtils.move_to_end" { desc = "Improved end"; } true ])
+    ];
+  };
 }

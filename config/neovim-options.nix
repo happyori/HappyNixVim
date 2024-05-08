@@ -47,7 +47,7 @@
     sidescrolloff = 8;
     signcolumn = "yes";
     smartcase = true;
-    smartindent = true;
+    smartindent = false;
     spelllang = [ "en" ];
     splitbelow = true;
     splitkeep = "screen";
