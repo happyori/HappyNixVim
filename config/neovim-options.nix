@@ -6,11 +6,12 @@
     neovide_refresh_rate = 170;
     neovide_confirm_quit = true;
     neovide_cursor_vfx_mode = "railgun";
-    neovide_floating_blur_amount_x = 2.0;
-    neovide_floating_blur_amount_y = 2.0;
+    neovide_floating_blur_amount_x = 10.0;
+    neovide_floating_blur_amount_y = 10.0;
     neovide_floating_shadow = true;
     neovide_floating_z_height = 8;
     neovide_floating_angle_degrees = 45;
+    neovide_transparency = 0.7;
     neovide_floating_ligth_radius = 5;
     mapleader = " ";
     maplocalleader = "\\";
@@ -36,9 +37,9 @@
     mouse = "a";
     number = true;
     relativenumber = true;
-    pumblend = 15;
+    pumblend = 60;
     pumheight = 10;
-    winblend = 30;
+    winblend = 100;
     sessionoptions = "buffers,curdir,tabpages,winsize,help,globals,skiprtp,folds";
     shiftround = true;
     shiftwidth = 2;

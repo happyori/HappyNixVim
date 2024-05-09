@@ -23,9 +23,11 @@
         perSystem =
           { pkgs
           , system
+          , self'
           , ...
           }:
           let
+            inherit (inputs.nixpkgs.lib) getExe;
             nixvimLib = nixvim.lib.${system};
             nixvim' = nixvim.legacyPackages.${system};
             nixvimModule = {
@@ -44,6 +46,7 @@
             };
             packages = {
               default = nvim;
+              nixvide = pkgs.callPackage ./nixvide.nix { nixvim = getExe self'.packages.default; };
             };
           };
       };
