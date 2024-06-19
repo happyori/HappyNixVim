@@ -48,6 +48,7 @@
               default = nvim;
               nixvide = pkgs.callPackage ./nixvide.nix { nixvim = getExe self'.packages.default; };
             };
+            devShells = { };
           };
       };
 }

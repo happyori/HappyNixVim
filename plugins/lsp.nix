@@ -6,6 +6,9 @@
       nixd = {
         enable = true;
         package = inputs.nixd.packages.${system}.nixd;
+        settings = {
+          options.nixvim.expr = ''(builtins.getFlake "${./../.}").packages.${system}.neovimNixvim.options'';
+        };
       };
       lua-ls = { enable = true; };
       dockerls = { enable = true; };
