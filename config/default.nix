@@ -1,6 +1,6 @@
 { inputs, system, ... }:
 {
-  package = inputs.neovim-nightly-overlay.defaultPackage.${system};
+  package = inputs.neovim-nightly-overlay.packages.${system}.default;
   imports = [
     ./colorscheme.nix
     ./neovim-options.nix
