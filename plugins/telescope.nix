@@ -27,6 +27,12 @@
           desc = "Find files in the root dir";
         };
       };
+      "<leader>/" = {
+        action = "live_grep";
+        options = {
+          desc = "Find in files";
+        };
+      };
     };
   };
 }
