@@ -14,6 +14,7 @@
     ./status-line.nix
     ./oil.nix
     ./pairs.nix
+    ./lazydev.nix
   ];
 
   plugins.nix.enable = true;

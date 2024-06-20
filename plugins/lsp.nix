@@ -103,35 +103,11 @@
       end
     '';
     onAttach = /* lua */ ''
-      setup_codelens_and_inlay(client, bufnr)
+      -- setup_codelens_and_inlay(client, bufnr)
     '';
   };
 
   plugins.which-key.registrations = {
     "<leader>cl" = "LSP";
   };
-
-  extraPlugins = [
-    pkgs.vimPlugins.neodev-nvim
-  ];
-
-  extraConfigLua = /* lua */ ''
-    require("neodev").setup({
-      library = {
-        enable = true,
-        runtime = true,
-        types = true,
-        plugins = { "nvim-treesitter", "telescope.nvim" },
-      },
-      setup_jsonls = true,
-      lspconfig = true,
-      pathStrict = true,
-      override = function(root_dir, lib)
-        if root_dir:find("${./.}/lua", 1, true) == 1 then
-          lib.enabled = true
-          lib.plugins = true
-        end
-      end
-    })
-  '';
 }
