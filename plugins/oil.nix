@@ -17,13 +17,12 @@
     {
       mode = "n";
       key = "<leader>o";
-      action = /* lua */ ''
+      action = helpers.mkRaw /* lua */ ''
         function()
           require("oil").toggle_float()
         end
       '';
       options = { desc = "Open oil float"; };
-      lua = true;
     }
   ];
 }

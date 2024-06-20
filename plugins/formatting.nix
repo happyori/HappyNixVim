@@ -1,3 +1,4 @@
+{ helpers, ... }:
 {
   plugins.conform-nvim = {
     enable = true;
@@ -27,8 +28,7 @@
     {
       mode = [ "n" "v" ];
       key = "<leader>cF";
-      action = "function() require('conform').format({ fromatters = { 'injected' }, timeout_ms = 3000 }) end";
-      lua = true;
+      action = helpers.mkRaw "function() require('conform').format({ fromatters = { 'injected' }, timeout_ms = 3000 }) end";
       options = { desc = "Format injected langs"; };
     }
   ];

@@ -1,5 +1,6 @@
-{ lib, ... }:
+{ lib, helpers, ... }:
 let
+  inherit (helpers) mkRaw;
   betterUpDown = { key, dir ? key }:
     let
       mode = [ "n" "x" ];
@@ -12,11 +13,10 @@ let
       inherit (lib) elemAt optionalAttrs length;
       mode = elemAt mapList 0;
       key = elemAt mapList 1;
-      action = elemAt mapList 2;
+      action = if length mapList > 4 && elemAt mapList 4 then mkRaw (elemAt mapList 2) else elemAt mapList 2;
       options = optionalAttrs (length mapList > 3) (elemAt mapList 3);
-      lua = if length mapList > 4 then elemAt mapList 4 else false;
     in
-    { inherit mode key action options lua; };
+    { inherit mode key action options; };
   windowMovement =
     let
       keys = [ "h" "j" "k" "l" ];

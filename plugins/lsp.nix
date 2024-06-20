@@ -22,6 +22,7 @@
       tsserver = { enable = true; };
       yamlls = { enable = true; };
       gopls = { enable = true; };
+
     };
 
     keymaps =
