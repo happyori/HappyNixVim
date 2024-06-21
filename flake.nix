@@ -27,6 +27,7 @@
           , ...
           }:
           let
+            inherit (inputs.nixpkgs.lib) getExe;
             nixvimLib = nixvim.lib.${system};
             nixvim' = nixvim.legacyPackages.${system};
             nixvimModule = {
@@ -45,24 +46,9 @@
             };
             packages = {
               default = nvim;
+              nixvide = pkgs.callPackage ./nixvide.nix { nixvim = getExe self'.packages.default; };
             };
-            devShells = rec {
-              nixvimFF = pkgs.mkShellNoCC {
-                name = "nixvim";
-                nativeBuildInputs = [ nvim pkgs.fd pkgs.fzf ];
-                shellHook = ''fd -t f | fzf --preview "cat {}" | xargs nvim && exit'';
-              };
-              nixvideFF = pkgs.mkShellNoCC {
-                name = "nixvideFF";
-                nativeBuildInputs = [ nvim pkgs.fd pkgs.fzf pkgs.neovide ];
-                shellHook = ''fd -t f | fzf --preview "cat {}" | xargs neovide && exit'';
-              };
-              nixvide = pkgs.mkShellNoCC {
-                name = "nixvide";
-                nativeBuildInputs = [ nvim pkgs.neovide ];
-              };
-              default = nixvide;
-            };
+            devShells = { };
           };
       };
 }
