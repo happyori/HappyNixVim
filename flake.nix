@@ -44,11 +44,11 @@
             checks = {
               default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
             };
-            packages = {
-              default = nvim;
+            packages = rec {
+              default = nixvide;
+              inherit nvim;
               nixvide = pkgs.callPackage ./nixvide.nix { nixvim = getExe self'.packages.default; };
             };
-            devShells = { };
           };
       };
 }
