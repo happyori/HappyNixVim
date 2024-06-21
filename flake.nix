@@ -39,15 +39,15 @@
               };
             };
             nvim = nixvim'.makeNixvimWithModule nixvimModule;
+            nixvide = pkgs.callPackage ./nixvide.nix { nixvim = getExe self'.packages.nvim; };
           in
           {
             checks = {
               default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
             };
-            packages = rec {
+            packages = {
               default = nixvide;
-              inherit nvim;
-              nixvide = pkgs.callPackage ./nixvide.nix { nixvim = getExe self'.packages.default; };
+              inherit nvim nixvide;
             };
           };
       };
