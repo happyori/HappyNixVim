@@ -42,6 +42,12 @@ end
 
 function HappyUtils:inspect_globals()
   local globals = vim.g
+  local result = ''
+  for key, value in pairs(globals) do
+    result = result + key + ":" + value + "\n"
+  end
+
+  vim.inspect(result)
 end
 
 function HappyUtils:auto_indent(row)
