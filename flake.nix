@@ -59,7 +59,7 @@
               };
               nixvide = pkgs.mkShellNoCC {
                 name = "nixvide";
-                nativeBuildInputs = [ nvim pkgs.neovide pkgs.bash ];
+                nativeBuildInputs = [ nvim pkgs.neovide ];
               };
               default = nixvide;
             };
