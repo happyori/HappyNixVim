@@ -47,15 +47,19 @@
               default = nvim;
             };
             devShells = rec {
-              nixvim = pkgs.mkShellNoCC {
+              nixvimFF = pkgs.mkShellNoCC {
                 name = "nixvim";
-                nativeBuildInputs = [ self'.packages.default pkgs.fd pkgs.fzf ];
-                shellHook = ''fd | fzf --preview "cat {}" | xargs nvim && exit'';
+                nativeBuildInputs = [ nvim pkgs.fd pkgs.fzf ];
+                shellHook = ''fd -t f | fzf --preview "cat {}" | xargs nvim && exit'';
+              };
+              nixvideFF = pkgs.mkShellNoCC {
+                name = "nixvideFF";
+                nativeBuildInputs = [ nvim pkgs.fd pkgs.fzf pkgs.neovide ];
+                shellHook = ''fd -t f | fzf --preview "cat {}" | xargs neovide && exit'';
               };
               nixvide = pkgs.mkShellNoCC {
                 name = "nixvide";
-                nativeBuildInputs = [ self'.packages.default pkgs.fd pkgs.fzf pkgs.neovide ];
-                shellHook = ''fd | fzf --preview "cat {}" | xargs neovide && exit'';
+                nativeBuildInputs = [ nvim pkgs.neovide pkgs.bash ];
               };
               default = nixvide;
             };
