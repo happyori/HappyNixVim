@@ -17,15 +17,16 @@ function HappyUtils:is_neovide()
 end
 
 function HappyUtils.close_buffer()
-  local success, bd = pcall(require("mini.bufremove").delete)
+  local success, bdModule = pcall(require, "mini.bufremove")
   if not success then
     vim.notify("Cannot remove buffer as mini.bufremove is not installed")
     return
   end
-  if bd == nil then
-    vim.notify("Buffer remove not found")
+  if bdModule == nil then
+    vim.notify("Buffer remove module not found")
     return
   end
+  local bd = bdModule.delete
 
   if vim.bo.modified then
     local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname(0)), "&Yes\n&No\n&Cancel")
