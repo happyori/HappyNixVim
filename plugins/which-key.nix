@@ -4,8 +4,8 @@
     registrations = {
       "<leader>g" = "Git";
       "<leader>q" = "Quit|Sessions";
-      "<leader>x" = "Dignostics";
       "<leader>c" = "Code";
+      "<leader>u" = "UI|Inspections";
     };
     window.winblend = 40;
   };

@@ -1,4 +1,11 @@
-{ inputs, lib, pkgs, system, ... }:
+{ inputs, lib, pkgs, system, config, ... }:
+let
+  inherit (config.happy) mkKeymap;
+  currentHostname =
+    if builtins.pathExists /etc/hostname then
+      (builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile /etc/hostname))
+    else "happypc";
+in
 {
   plugins.lsp = {
     enable = true;
@@ -7,7 +14,10 @@
         enable = true;
         package = inputs.nixd.packages.${system}.nixd;
         settings = {
-          options.nixvim.expr = ''(builtins.getFlake "${./../.}").packages.${system}.neovimNixvim.options'';
+          options = {
+            nixvim.expr = ''(builtins.getFlake "github:happyori/HappyNixVim").packages.${system}.nvim.options'';
+            nixos.expr = ''(builtins.getFlake "/home/happy/.config/nixos").nixosConfigurations.${currentHostname}.options'';
+          };
         };
       };
       lua-ls = { enable = true; };
@@ -107,7 +117,34 @@
     '';
   };
 
-  plugins.which-key.registrations = {
-    "<leader>cl" = "LSP";
+  plugins = {
+    typescript-tools = {
+      enable = true;
+    };
+    which-key.registrations = {
+      "<leader>cl" = "LSP";
+    };
   };
+
+  happy.patternKeymapsOnEvents = [
+    {
+      event = "BufEnter";
+      pattern = "*.ts";
+      mappings = lib.flatten [
+        (mkKeymap [ "n" "<leader>cTo" "<cmd>TSToolsOrganizeImports<cr>" { desc = "TS: Organize and Remove Imports"; } ])
+        (mkKeymap [ "n" "<leader>cTs" "<cmd>TSToolsSortImports<cr>" { desc = "TS: Sort Imports"; } ])
+        (mkKeymap [ "n" "<leader>cTf" "<cmd>TSToolsFixAll<cr>" { desc = "TS: Fix all fixable errors"; } ])
+        (mkKeymap [ "n" "<leader>cTr" "<cmd>TSToolsRenameFile<cr>" { desc = "TS: Rename file"; } ])
+      ];
+    }
+  ];
+
+  extraPlugins = [
+    pkgs.vimPlugins.nvim-nu
+  ];
+
+  extraConfigLua = ''
+    require("nu").setup({})
+  '';
+
 }

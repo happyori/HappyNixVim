@@ -8,6 +8,11 @@ let
       options = { expr = true; silent = true; };
     in
     { inherit mode key action options; };
+  # this is meant to be used as a shortcut
+  # mode key and action are strings
+  # lua is a boolean optional value that can be ignored or set to true if action is a lua string
+  # options is attrSet of options see :h nvim_set_keymap() {opts} for more information
+  # keymap' [ "mode" "key" "action" { options } lua ]
   keymap' = mapList:
     let
       inherit (lib) elemAt optionalAttrs length;

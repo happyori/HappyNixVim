@@ -1,6 +1,8 @@
 {
   imports = [
     ./autocomplete.nix
+    ./surround.nix
+    ./trouble.nix
     ./lsp.nix
     ./flash.nix
     ./formatting.nix
@@ -15,6 +17,7 @@
     ./oil.nix
     ./pairs.nix
     ./lazydev.nix
+    ./lib
   ];
 
   plugins.nix.enable = true;
