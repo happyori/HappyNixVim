@@ -29,10 +29,8 @@ in
         installCargo = true;
         installRustc = true;
       };
-      tsserver = { enable = true; };
       yamlls = { enable = true; };
       gopls = { enable = true; };
-
     };
 
     keymaps =
@@ -143,8 +141,11 @@ in
     pkgs.vimPlugins.nvim-nu
   ];
 
+  extraPackages = [
+    pkgs.nodePackages.typescript-language-server
+  ];
+
   extraConfigLua = ''
     require("nu").setup({})
   '';
-
 }

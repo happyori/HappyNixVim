@@ -2,6 +2,11 @@
 {
   extraConfigLuaPre = builtins.readFile ../lua/happy_utils.lua;
 
+  diagnostics = {
+    severity_sort = true;
+    virtual_text = true;
+  };
+
   globals = {
     neovide_refresh_rate = 170;
     neovide_confirm_quit = true;
@@ -19,7 +24,7 @@
 
   opts = {
     guifont = "CaskaydiaCove Nerd Font";
-    scrolloff = 8;
+    scrolloff = 12;
     foldlevel = 99;
     conceallevel = 2;
     cursorline = true;
