@@ -118,6 +118,9 @@ in
   plugins = {
     typescript-tools = {
       enable = true;
+      settings = {
+        tsserverPath = pkgs.nodePackages.typescript-language-server.outPath + "/lib/node_modules/typescript/lib/tsserver.js";
+      };
     };
     which-key.registrations = {
       "<leader>cl" = "LSP";
