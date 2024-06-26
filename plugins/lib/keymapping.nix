@@ -49,7 +49,7 @@ in
             do
               local __nixvim_binds = ${helpers.toLuaObject atts.mappings}
               for i, map in ipairs(__nixvim_binds) do
-                vim.keymaps.set(map.mode, map.key, map.action, map.options)
+                vim.keymap.set(map.mode, map.key, map.action, map.options)
               end
             end
           end
