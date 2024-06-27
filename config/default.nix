@@ -5,6 +5,7 @@
     ./colorscheme.nix
     ./neovim-options.nix
     ./keymaps.nix
+    ./autocmds.nix
     ../plugins
   ];
 

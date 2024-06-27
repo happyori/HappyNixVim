@@ -24,7 +24,6 @@ in
           {
             event = "BufRead";
             pattern = "*.ts";
-            group = null;
             mappings = [
               {
                 mode = "n";

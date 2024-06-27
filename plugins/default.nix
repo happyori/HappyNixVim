@@ -1,6 +1,7 @@
 {
   imports = [
     ./autocomplete.nix
+    ./editor.nix
     ./surround.nix
     ./trouble.nix
     ./lsp.nix

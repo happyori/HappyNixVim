@@ -32,7 +32,17 @@ in
       yamlls = { enable = true; };
       gopls = { enable = true; };
     };
-
+    inlayHints = true;
+    capabilities = /* lua */ ''
+      vim.tbl_deep_extend("force", capabilities, {
+        workspace = {
+          fileOperations = {
+            didRename = true,
+            willRename = true,
+          },
+        },
+      })
+    '';
     keymaps =
       let
         keymap' = mapList:
@@ -86,33 +96,6 @@ in
           }
         ];
       };
-    preConfig = /* lua */ ''
-      local function setup_codelens_and_inlay(client, buffer)
-        if client.supports_method("textDocument/inlayHint") then
-          local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-          if type(ih) == "function" then
-            ih(buf, true)
-          elseif type(ih) == "table" and ih.enable then
-            ih.enable(true, { bufnr = buf })
-          end
-        end
-
-        if vim.lsp.codelens then
-          if client.supports_method("textDocument/codeLens") then
-            local codelens_enabled, _ = pcall(vim.lsp.codelens.refresh)
-            if codelens_enabled then
-              vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-                buffer = buffer,
-                callback = function() pcall(vim.lsp.codelens.refresh) end,
-              })
-            end
-          end
-        end
-      end
-    '';
-    onAttach = /* lua */ ''
-      -- setup_codelens_and_inlay(client, bufnr)
-    '';
   };
 
   plugins = {
@@ -142,6 +125,7 @@ in
 
   extraPlugins = [
     pkgs.vimPlugins.nvim-nu
+    pkgs.vimPlugins.otter-nvim
   ];
 
   extraPackages = [
@@ -150,5 +134,19 @@ in
 
   extraConfigLua = ''
     require("nu").setup({})
+    require("otter").setup({
+      lsp = {
+        hover = {
+          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        },
+        diagnostic_update_events = { "BufWritePost" },
+      },
+      buffers = {
+        set_filetype = false,
+        write_to_disk = false,
+      },
+      strip_wrapping_quote_characters = { "'", '"', "`" },
+      handle_leading_whitespace = false
+    })
   '';
 }

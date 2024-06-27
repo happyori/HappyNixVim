@@ -1,0 +1,6 @@
+{ ... }:
+{
+  plugins = {
+    comment.enable = true;
+  };
+}
