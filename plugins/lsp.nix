@@ -25,11 +25,18 @@ in
       jsonls = { enable = true; };
       nushell = { enable = true; };
       rust-analyzer = {
-        enable = true;
+        enable = false;
         installCargo = true;
         installRustc = true;
       };
       yamlls = { enable = true; };
+      eslint = {
+        enable = true;
+        settings = {
+          workingDirectories = { mode = "auto"; };
+        };
+      };
+      tailwindcss = { enable = true; settings = { filetypes_exclude = [ "markdown" ]; }; };
       gopls = { enable = true; };
     };
     inlayHints = true;
@@ -39,6 +46,12 @@ in
           fileOperations = {
             didRename = true,
             willRename = true,
+          },
+        },
+        textDocument = {
+          foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
           },
         },
       })
@@ -108,6 +121,25 @@ in
     which-key.registrations = {
       "<leader>cl" = "LSP";
     };
+    rustaceanvim = {
+      enable = true;
+      settings = {
+        server = {
+          settings = {
+            inlayHints = {
+              lifetimeElisionHints = {
+                enable = "always";
+              };
+              implicitDrops.enable = true;
+            };
+            check = {
+              command = "clippy";
+            };
+            imports.preferPrelude = true;
+          };
+        };
+      };
+    };
   };
 
   happy.patternKeymapsOnEvents = [
@@ -121,6 +153,27 @@ in
         (mkKeymap [ "n" "<leader>cTr" "<cmd>TSToolsRenameFile<cr>" { desc = "TS: Rename file"; } ])
       ];
     }
+    {
+      event = "BufEnter";
+      pattern = "*.rs";
+      mappings = lib.flatten [
+        (mkKeymap [ "n" "<leader>cRe" "<cmd>RustLsp expandMacro<cr>" { desc = "Rust: Expand Macro"; } ])
+        (mkKeymap [ "n" "<leader>cRc" "<cmd>RustLsp openCargo<cr>" { desc = "Rust: Open Cargo.toml"; } ])
+        (mkKeymap [ "n" "<leader>cRp" "<cmd>RustLsp parentModule<cr>" { desc = "Rust: Go to Parent Module"; } ])
+        (mkKeymap [ [ "n" "v" ] "<leader>cRj" "<cmd>RustLsp joinLines<cr>" { desc = "Rust: Smart Join Lines"; } ])
+      ];
+    }
+  ];
+
+  happy.whichKeyRegisterOnPattern = [
+    {
+      pattern = "*.ts";
+      mappings = [{ name = "Typescript"; bind = "<leader>cT"; }];
+    }
+    {
+      pattern = "*.rs";
+      mappings = [{ name = "Rust"; bind = "<leader>cR"; }];
+    }
   ];
 
   extraPlugins = [
@@ -130,6 +183,7 @@ in
 
   extraPackages = [
     pkgs.nodePackages.typescript-language-server
+    pkgs.clippy
   ];
 
   extraConfigLua = ''

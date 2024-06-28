@@ -13,6 +13,7 @@
         lua = [ "stylua" ];
         fish = [ "fish_indent" ];
         sh = [ "shfmt" ];
+        javascript = [ [ "prettierd" "prettier" ] ];
       };
       formatters = {
         injected = { options = { ignore_errors = true; }; };

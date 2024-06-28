@@ -32,6 +32,7 @@
     guifont = "CaskaydiaCove Nerd Font";
     scrolloff = 12;
     foldlevel = 99;
+    foldlevelstart = 99;
     conceallevel = 2;
     cursorline = true;
     autowrite = true;
@@ -77,7 +78,7 @@
     fillchars = {
       foldopen = "";
       foldclose = "";
-      fold = "…";
+      fold = " ";
       foldsep = " ";
       diff = "╱";
       eob = " ";

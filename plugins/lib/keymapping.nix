@@ -47,7 +47,7 @@ in
           function()
             do
               local __nixvim_binds = ${helpers.toLuaObject atts.mappings}
-              for i, map in ipairs(__nixvim_binds) do
+              for _, map in ipairs(__nixvim_binds) do
                 vim.keymap.set(map.mode, map.key, map.action, map.options)
               end
             end
